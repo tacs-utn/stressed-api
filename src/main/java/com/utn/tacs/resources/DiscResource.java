@@ -43,13 +43,21 @@ public class DiscResource {
 
             for(Album artistAlbum : artistAlbums){
                 if(artistAlbum.getYear().equals(key.getYear())){
-                    albumsByYear.add(artistAlbum);
+                    albumsByYear.add(artistAlbum.deepClone());
                 }
             }
             cache.put(key, albumsByYear);
             return albumsByYear;
         }
 
+    }
+
+    public static Map<String, Integer> getCacheSize(Request request, Response response) throws Exception {
+        response.header("Content-Type", "application/json");
+        response.status(HttpServletResponse.SC_OK);
+        Map<String, Integer> map = new HashMap<>();
+        map.put("size", cache.size());
+        return map;
     }
 
 

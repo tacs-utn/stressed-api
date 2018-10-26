@@ -39,6 +39,7 @@ public class Router implements SparkApplication{
 
 
         get(BASE_PATH + "/albums/:artist", DiscResource::getAlbumsByArtistYearQueryString, jsonTrans);
+        get(BASE_PATH + "/cacheSize", DiscResource::getCacheSize, jsonTrans);
 
 
         get("/health", (request, response) -> {
